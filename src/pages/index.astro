@@ -1,82 +1,301 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-    </p>
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-    </ul>
+<Layout title="Emacs Twist: An intersection of Emacs and Nix">
+  <main
+    class="snap-y snap-proximity sm:snap-mandatory overflow-y-scroll w-screen h-screen"
+  >
+    <section
+      class="snap-start h-screen flex flex-col justify-center items-center p-8 bg-dark1 bg-right-bottom bg-no-repeat bg-auto"
+    >
+      <div
+        class="max-h-[60rem] h-full max-w-[100ch] w-full flex flex-col gap-8 justify-evenly"
+      >
+        <h1 class="text-white text-4xl sm:text-5xl">
+          An intersection of Emacs and Nix.
+        </h1>
+        <div class="flex flex-col gap-4 max-w-[60ch]">
+          <p class="text-white text-lg leading-normal">
+            Twist is a package manager for Emacs, written in Nix.
+          </p>
+          <p class="text-white text-lg leading-normal">
+            Its goal is to make Emacs configurations truly reproducible and
+            reliable.
+          </p>
+        </div>
+        <div class="max-w-[40ch] flex justify-center items-center">
+          <!-- FIXME: Point to the right URL -->
+          <a
+            class="cta block text-xl bg-light1 hover:bg-light2 rounded-full px-4 py-3 min-w-[16ch] text-center shadow shadow-inner drop-shadow-xl"
+            href="https://github.com/emacs-twist/twist.nix"
+          >
+            Get started
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="snap-start min-h-screen p-8 flex flex-col justify-center gap-12 items-center bg-light1"
+    >
+      <h1 class="hidden">Features</h1>
+
+      <p class="max-w-paragraph">
+        Twist is different from other package managers for Emacs in the
+        following aspects:
+      </p>
+
+      <ul class="h-full grid md:grid-cols-features gap-12 content-evenly">
+        <li class="text-dark2">
+          <strong class="text-lg">Reproducible builds with Nix</strong>
+
+          <p>
+            Rather than running a build process inside a running session of
+            Emacs, Twist builds packages in a sandboxed Nix session. This
+            ensures that your entire configuration is always reproducible.
+          </p>
+        </li>
+
+        <li class="text-dark2">
+          <strong class="text-lg">Consistent lock system</strong>
+
+          <p>
+            All packages are tracked in a lock directory. You can keep a known
+            good state of working configuration to a version control system, so
+            you can restore the state whenever an upgrade breaks your
+            configuration.
+          </p>
+
+          <p>
+            Your lock directory is like a Software Bill of Materials (SBOM),
+            which helps to increase the security of your system.
+          </p>
+        </li>
+
+        <li class="text-dark2">
+          <strong class="text-lg">Developer friendliness</strong>
+
+          <p>
+            Twist easily allows you to control sources of individual packages.
+            Rather than upgrading all packages at once, you can update
+            individual packages using <a
+              href="https://nixos.org/manual/nix/unstable/command-ref/experimental-commands.html"
+              >nix commands</a
+            > (e.g. <code>nix flake lock</code>).This is especially useful if
+            you are a constant contributor to Emacs Lisp packages. There is even
+            an experimental Emacs user interface for updating flake inputs,
+            <a href="https://github.com/emacs-twist/nix3.el">nix3.el</a>.
+          </p>
+        </li>
+
+        <li class="text-dark2">
+          <strong class="text-lg">Native-like user experience</strong>
+
+          <p>
+            Twist also supports hot-reloading of packages (experimental, through
+            use of a standard wrapper and <a
+              href="https://github.com/emacs-twist/twist.el">twist.el</a
+            > package). You can use new packages without restarting Emacs, while
+            the configuration is still reproducible.
+          </p>
+        </li>
+
+        <li class="text-dark2">
+          <strong class="text-lg">Complete runtime environment</strong>
+
+          <p>
+            Some Emacs Lisp packages have runtime dependencies on executables.
+            Twist can feed Nix packages to Emacs. <a
+              href="https://github.com/NixOS/nixpkgs/">Nixpkgs</a
+            > is the largest registry of software packages, and it is cross platform.
+          </p>
+
+          <p>
+            You can use executable packages inside Emacs without restarting the
+            session, just like Emacs Lisp packages.
+          </p>
+        </li>
+
+        <li class="text-dark2">
+          <strong class="text-lg">Decentralized</strong>
+
+          <p>
+            Twist doesn't depend on a central server for building packages. It
+            fetches sources from upstream repositories and builds them on your
+            machine. It relies on <a href="https://opencollective.com/nixos"
+              >the Nix ecosystem's infrastructure</a
+            >, which is backed by many commercial sponsors. You also have a
+            freedom to set up your binary cache using a service like <a
+              href="https://www.cachix.org/">Cachix</a
+            > with a minimal effort.
+          </p>
+        </li>
+      </ul>
+
+      <div class="flex flex-col gap-8">
+        <p>It supports the following types of packages:</p>
+
+        <ul class="flex flex-col gap-4 list-checkmark">
+          <li>
+            Packages from <a href="https://elpa.gnu.org/packages/">GNU ELPA</a> and
+            <a href="https://elpa.nongnu.org/nongnu/">NonGNU ELPA</a>
+          </li>
+          <li>
+            Packages from <a href="https://melpa.org/#/">MELPA</a>
+          </li>
+          <li>
+            Packages from <a href="https://github.com/emacsmirror"
+              >Emacsmirror</a
+            >, including those archived in <a
+              href="https://github.com/emacsattic/">Emacsattic</a
+            >
+          </li>
+          <li>
+            Custom packages defined in the form of <a
+              href="https://github.com/melpa/melpa#recipe-format"
+              >MELPA-style recipes</a
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="snap-start p-8 flex justify-center items-center min-h-screen bg-light2"
+    >
+      <div class="w-full max-w-[100ch] h-full max-h-96 flex flex-col gap-16">
+        <h1 class="text-3xl">nix3.el, the companion to Twist</h1>
+
+        <div class="h-full flex flex-col justify-start gap-8">
+          <p class="max-w-paragraph">
+            <a href="https://github.com/emacs-twist/nix3.el"> nix3.el</a> is an Emacs
+            frontend to <a href="https://nixos.wiki/wiki/Flakes">Nix flakes</a>.
+            Not only does it let you maintain the revisions of individual
+            packages in your Emacs configuration, but it is also useful for
+            working on other projects in any language, managed with Nix.
+          </p>
+
+          <p class="max-w-paragraph">
+            It is an interactive browsing interface to Nix flakes. You can
+            update dependencies, build packages, run commands, and more. It
+            grows as the system of Nix flakes evolves.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="snap-start min-h-screen flex flex-col justify-between items-center bg-no-repeat bg-right bg-contain"
+    >
+      <div
+        class="w-full max-w-[100ch] px-8 py-16 flex flex-col gap-8 sm:gap-16 justify-around"
+      >
+        <h1 class="hidden">Discover more information</h1>
+
+        <div class="flex flex-col gap-6 sm:gap-8">
+          <h2 class="text-2xl">Explore more on Twist</h2>
+
+          <ul class="flex flex-col gap-6 list-arrow">
+            <!-- <li>Check out the documentation.</li> -->
+            <li>
+              See <a href="https://github.com/emacs-twist/examples"
+                >example configurations</a
+              >
+            </li>
+            <li>
+              Browse <a href="https://github.com/emacs-twist"
+                >GitHub repositories</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-6 sm:gap-8">
+          <h2 class="text-2xl">Getting started with Nix</h2>
+
+          <ul class="flex flex-col gap-6 list-arrow">
+            <li>
+              <a href="https://nixos.org/download.html">Download Nix</a>
+            </li>
+            <li>
+              Learn Nix on <a href="https://nix.dev/">nix.dev</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-6 sm:gap-8">
+          <h2 class="text-2xl">Support</h2>
+
+          <p>
+            <a href="https://github.com/emacs-twist/twist.nix/issues"
+              >File a ticket</a
+            >
+            or <a href="https://github.com/emacs-twist/twist.nix/discussions"
+              >join a discussion</a
+            > on GitHub
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-6 sm:gap-8">
+          <h2 class="text-2xl">Donate</h2>
+
+          <p>Coming soon</p>
+        </div>
+      </div>
+
+      <footer class="w-full bg-gray2 flex flex-col gap-8 p-8">
+        <p class="text-xs text-gray4 text-center">
+          This website is licensed under a
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+            >CC BY-SA 4.0 license
+          </a>.
+        </p>
+      </footer>
+    </section>
   </main>
 </Layout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
+  section.bg-dark1 {
+    @apply bg-[url('/image/landing-bg1.jpg')] bg-center sm:bg-right-bottom bg-[length:75vh];
   }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
+
+  section.bg-light1 {
+    @apply bg-[url('/image/landing-bg2.jpg')]
+      bg-no-repeat
+      bg-bottom sm:bg-right-top
+      bg-fixed sm:bg-scroll
+      bg-opacity-100
+      bg-contain sm:bg-[length:60vh];
   }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+
+  section:last-child {
+    @apply lg:bg-[url('/image/landing-bg3.jpg')];
   }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+
+  a:not(.cta) {
+    @apply underline decoration-2 hover:decoration-4
+    decoration-accent1 underline-offset-4
+    font-bold;
   }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
+
+  footer a:not(.cta) {
+    @apply font-normal underline decoration-1 hover:decoration-1 underline-offset-2 decoration-gray4 hover:decoration-white;
   }
-  .instructions strong {
-    color: rgb(var(--accent));
+
+  .list-checkmark > li {
+    @apply bg-checkmark bg-no-repeat bg-left bg-[length:1.5rem] pl-8;
   }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
+
+  .list-arrow > li {
+    @apply bg-arrow bg-no-repeat bg-left bg-[length:1rem] pl-6;
+  }
+</style>
+
+<style is:global>
+  code {
+    @apply font-mono underline underline-offset-4
+    decoration-1 decoration-dashed decoration-gray2;
   }
 </style>
