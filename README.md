@@ -16,7 +16,7 @@ install them if you are using Nix.
 
 To preview, run a development server of Astro:
 
-``` shell
+```shell
 pnpm dev
 ```
 
