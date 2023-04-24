@@ -60,7 +60,7 @@ jobs:
   deploy:
     needs: build-and-upload
 
-    # if: ${{ github.ref == 'refs/head/master' }}
+    if: ${{ github.ref == 'refs/head/master' }}
 
     runs-on: ubuntu-latest
 
