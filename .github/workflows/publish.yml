@@ -3,9 +3,15 @@ name: Publish to GitHub Pages
 on:
   workflow_dispatch:
   pull_request:
+    paths-ignore:
+    - README.*
+    - .github/**
   push:
     branches:
     - master
+    paths-ignore:
+    - README.*
+    - .github/**
 
 jobs:
   check:
