@@ -10,12 +10,12 @@ import Layout from '../layouts/Layout.astro';
       class="snap-start h-screen flex flex-col justify-center items-center p-8 bg-dark1 bg-right-bottom bg-no-repeat bg-auto"
     >
       <div
-        class="max-h-[60rem] h-full max-w-[100ch] w-full flex flex-col gap-8 justify-evenly"
+        class="max-h-[60rem] h-full max-w-[100ch] w-full flex flex-col gap-8 justify-evenly items-center xl:items-start"
       >
         <h1 class="text-white text-4xl sm:text-5xl">
           An intersection of Emacs and Nix.
         </h1>
-        <div class="flex flex-col gap-4 max-w-[60ch]">
+        <div class="flex flex-col gap-4 lg:max-w-[60ch]">
           <p class="text-white text-lg leading-normal">
             Twist is a package manager for Emacs, written in Nix.
           </p>
@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
             reliable.
           </p>
         </div>
-        <div class="max-w-[40ch] flex justify-center items-center">
+        <div class="xl:max-w-[40ch] flex justify-center items-center">
           <!-- FIXME: Point to the right URL -->
           <a
             class="cta block text-xl bg-light1 hover:bg-light2 rounded-full px-4 py-3 min-w-[16ch] text-center shadow shadow-inner drop-shadow-xl"
@@ -164,7 +164,9 @@ import Layout from '../layouts/Layout.astro';
     <section
       class="snap-start p-8 flex justify-center items-center min-h-screen bg-light2"
     >
-      <div class="w-full max-w-[100ch] h-full max-h-96 flex flex-col gap-16">
+      <div
+        class="xl:w-full xl:max-w-[100ch] h-full max-h-96 flex flex-col gap-16"
+      >
         <h1 class="text-3xl">nix3.el, the companion to Twist</h1>
 
         <div class="h-full flex flex-col justify-start gap-8">
@@ -258,7 +260,9 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   section.bg-dark1 {
-    @apply bg-[url('/image/landing-bg1.jpg')] bg-center sm:bg-right-bottom bg-[length:75vh];
+    @apply bg-[url('/image/landing-bg1.jpg')]
+    bg-bottom lg:bg-right-bottom
+    lg:bg-[length:75vh];
   }
 
   section.bg-light1 {
