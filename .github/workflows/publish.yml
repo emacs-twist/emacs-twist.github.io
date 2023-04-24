@@ -1,0 +1,78 @@
+name: Publish to GitHub Pages
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+    - master
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
+      with:
+        version: 7
+        run_install: false
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 19
+        cache: 'pnpm'
+
+    - run: pnpm install
+
+    - run: pnpm lint:prettier
+
+    - run: pnpm lint:eslint
+
+  build-and-upload:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
+      with:
+        version: 7
+        run_install: false
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 19
+        cache: 'pnpm'
+
+    - run: pnpm install
+
+    - run: pnpm build
+
+    - uses: actions/upload-pages-artifact@v1.0.8
+      with:
+        path: dist
+
+  deploy:
+    needs: build-and-upload
+
+    if: ${{ github.ref == 'refs/head/master' }}
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
