@@ -105,15 +105,16 @@ import Layout from '../layouts/Layout.astro';
           <strong class="text-lg">Complete runtime environment</strong>
 
           <p>
-            Some Emacs Lisp packages have runtime dependencies on executables.
-            Twist can feed Nix packages to Emacs. <a
-              href="https://github.com/NixOS/nixpkgs/">Nixpkgs</a
-            > is the largest registry of software packages, and it is cross platform.
+            Some Emacs Lisp packages have runtime dependencies on external
+            programs. Twist can provide executable programs to Emacs by defining
+            dependencies alongside the Emacs Lisp package declarations. The
+            extra executables can be added without exiting Emacs, and they are
+            only visible to Emacs.
           </p>
-
           <p>
-            You can use executable packages inside Emacs without restarting the
-            session, just like Emacs Lisp packages.
+            Because <a href="https://github.com/NixOS/nixpkgs/">Nixpkgs</a> supports
+            multiple platforms (Linux and macOS), your Emacs configuration will be
+            a portable, self-contained environment for work.
           </p>
         </li>
 
