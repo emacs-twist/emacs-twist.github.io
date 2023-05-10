@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+import bg1 from '../assets/landing-bg1.jpg';
+import bg2 from '../assets/landing-bg2.jpg';
 ---
 
 <Layout title="Emacs Twist: An intersection of Emacs and Nix">
@@ -8,6 +11,7 @@ import Layout from '../layouts/Layout.astro';
   >
     <section
       class="snap-start h-screen flex flex-col justify-center items-center p-8 bg-dark1 bg-right-bottom bg-no-repeat bg-auto"
+      style={`background-image: url('${bg1.src}')`}
     >
       <div
         class="max-h-[60rem] h-full max-w-[100ch] w-full flex flex-col gap-8 justify-evenly items-center xl:items-start"
@@ -38,6 +42,7 @@ import Layout from '../layouts/Layout.astro';
 
     <section
       class="snap-start min-h-screen p-8 flex flex-col justify-center gap-12 items-center bg-light1"
+      style={`background-image: url('${bg2.src}')`}
     >
       <h1 class="hidden">Features</h1>
 
@@ -261,14 +266,12 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   section.bg-dark1 {
-    @apply bg-[url('/image/landing-bg1.jpg')]
-    bg-bottom lg:bg-right-bottom
+    @apply bg-bottom lg:bg-right-bottom
     lg:bg-[length:75vh];
   }
 
   section.bg-light1 {
-    @apply bg-[url('/image/landing-bg2.jpg')]
-      bg-no-repeat
+    @apply bg-no-repeat
       bg-bottom sm:bg-right-top
       bg-fixed sm:bg-scroll
       bg-opacity-100
