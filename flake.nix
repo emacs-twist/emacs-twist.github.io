@@ -1,25 +1,27 @@
 {
-  # Use the unstable nixpkgs to use the latest set of node packages
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
+  inputs = {
+    systems.url = "github:nix-systems/default";
+  };
 
   outputs = {
-    self,
+    systems,
     nixpkgs,
-    flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem
-    (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-      };
-    in {
-      devShells.default = pkgs.mkShell {
-        buildInputs = [
+    ...
+  } @ inputs: let
+    eachSystem = f:
+      nixpkgs.lib.genAttrs (import systems) (
+        system:
+          f nixpkgs.legacyPackages.${system}
+      );
+  in {
+    devShells = eachSystem (pkgs: {
+      default = pkgs.mkShell {
+        buildInputs = with pkgs; [
           pkgs.nodejs
           pkgs.nodePackages.pnpm
           pkgs.nodePackages.typescript
-          # pkgs.nodePackages.typescript-language-server
         ];
       };
     });
+  };
 }
